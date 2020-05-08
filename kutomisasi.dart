@@ -38,9 +38,17 @@ class TombolPilihan extends StatelessWidget {
   }
 }
 
-class TombolPilihan1 extends StatelessWidget {
-  final Function _fungsipilihJawaban;
-  TombolPilihan1(this._fungsipilihJawaban);
+class Tombol extends StatefulWidget {
+  @override
+  _TombolState createState() => _TombolState();
+}
+
+class _TombolState extends State<Tombol> {
+
+  var angka = 0;
+  fungsinambah(){
+    angka++;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +56,11 @@ class TombolPilihan1 extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: RaisedButton(
-        child: Text("1",
+        child: Text("$angka",
           style: TextStyle(color: Colors.white),
         ),
         color: Colors.purple,
-        onPressed: _fungsipilihJawaban,
+        onPressed: (){}
       ),
     );
   }

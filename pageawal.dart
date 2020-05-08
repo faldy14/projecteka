@@ -30,14 +30,21 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
   }
 
   //fungsi merubah halaman
-  var berubah = 0;
+  //berubah == ubahpertanyaan <-- kalau "berubah" ada error sini woi kiw kiw//
+  //ubahpertanyaan = dokumen
+  var ubahpertanyaan = 0;
+  //buatdokumen = buat dokumen firestore
   var buatdokumen = 0;
   void fungsitombol(){
-    setState(() {
-      berubah++;
+    //fungsi benernya
+    /*setState(() {
+      if (buatdokumen == 5){
+      buatdokumen = 0;
+      ubahpertanyaan++;
+      }
       buatdokumen++;
-    });
-    print(berubah);
+    });*/
+    //if tombol dipencet nambah jadi case apa
   }
 
   /*var pertanyaan = [
@@ -122,13 +129,19 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
               children: <Widget>[
                 //soal
                 StreamBuilder(
-                  stream: Firestore.instance.collection('cobapertanyaan').document('cobahostility').snapshots(),
+                  //pake getDocuments() coba biar ambil semua data di document
+                  stream: Firestore.instance
+                  .collection("cobapertanyaan")
+                  //coba bikin di 1 koleksi dulu 1 dokumen juga
+                  .document("$ubahpertanyaan")
+                  .snapshots(),
                   builder: (context, snapshot){
                     if (!snapshot.hasData){
-                    return Text("Loading");
+                      //loading muter nanti pindahin keluar
+                    return CircularProgressIndicator();
                     }
                   var userDocument = snapshot.data;
-                    //tuh 0 diubah jadi increment lah
+                    //udah bener sekarang tinggal di pilih biar random
                     return Text(userDocument["$buatdokumen"]);
                   }
                 ),
@@ -138,6 +151,8 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
                 // jadi ntar soalnya tuh collection trus document nah documenntya jadi 1 2 trus di pakein fungsi tambah2an jadi bisa random
                 // nah di userdocumentnya juga tuh jadi fungsi increment biar bisa berubah2
                 TombolPilihan(fungsitombol),
+                Tombol(),
+                Tombol(),
               ],
             )
             
