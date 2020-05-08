@@ -37,13 +37,13 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
   var buatdokumen = 0;
   void fungsitombol(){
     //fungsi benernya
-    /*setState(() {
+    setState(() {
       if (buatdokumen == 5){
       buatdokumen = 0;
       ubahpertanyaan++;
       }
       buatdokumen++;
-    });*/
+    });
     //if tombol dipencet nambah jadi case apa
   }
 
@@ -74,7 +74,6 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
 
   @override
   Widget build(BuildContext context) {
-
     //pertanyaan
     //Tutorial Quiz
     return Scaffold(
@@ -110,22 +109,8 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
           )
         ) */
 
-        child: /*StreamBuilder(
-          stream: Firestore.instance.collection('cobapertanyaan').snapshots(),
-          builder: (context, snapshot){
-            if (!snapshot.hasData){
-              return Text("Loading");
-            }
-            return ListView.builder(
-              itemExtent: 80,
-              itemCount: 2,
-              itemBuilder: (context, index){
-                return _bikinlist(context, snapshot.data.documents[index]);
-              },
-            );
-          },
-        ),*/
-            Column(
+        child:Container(
+          child: Column(
               children: <Widget>[
                 //soal
                 StreamBuilder(
@@ -142,28 +127,19 @@ class _HalamanawalbangetState extends State<Halamanawalbanget> {
                     }
                   var userDocument = snapshot.data;
                     //udah bener sekarang tinggal di pilih biar random
-                    return Text(userDocument["$buatdokumen"]);
+                    return Text(userDocument["$buatdokumen"],
+                      style: TextStyle(fontSize: 22),
+                    );
                   }
                 ),
-
-                //sini liat
-
                 // jadi ntar soalnya tuh collection trus document nah documenntya jadi 1 2 trus di pakein fungsi tambah2an jadi bisa random
                 // nah di userdocumentnya juga tuh jadi fungsi increment biar bisa berubah2
                 TombolPilihan(fungsitombol),
-                Tombol(),
-                Tombol(),
               ],
-            )
+            ),
+        )
             
       ), 
     );
   }
-
-  /*Widget _bikinlist(BuildContext context, DocumentSnapshot document){
-    return ListTile(
-      title: Text(document['1']),
-      //subtitle: Text(document['2']),
-    );
-  }*/
 }
